@@ -1,8 +1,6 @@
-/* add css styles here (optional) */
-
-.test {
-  display: inline-block;
-  margin: 2em auto;
-  border: 2px solid #000;
-  font-size: 2em;
+.boxLabel {
+  padding: 10px 6px 0 !important;
+  text-transform: none !important;
+  margin-bottom: 0 !important;
+  opacity: 0.55;
 }
