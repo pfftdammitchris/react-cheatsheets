@@ -16,7 +16,7 @@ npm install --save react-cheatsheets
 
 ```tsx
 import React from 'react'
-import ReactCheatsheet from 'react-cheatsheet'
+import ReactCheatsheets from 'react-cheatsheets'
 import snippets from './snippets'
 
 const App = () => {
@@ -29,7 +29,7 @@ const App = () => {
   }
 
   return (
-    <ReactCheatsheet
+    <ReactCheatsheets
       snippets={snippets}
       columnCount={3}
       language='jsx'
