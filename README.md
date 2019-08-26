@@ -2,7 +2,9 @@
 
 ## Generate cheat sheets using React
 
-Lots of todos to be done but it can still be used. Documentation is ongoing. Originally planned to be named _react-cheatsheets_ but "cheat" was forbidden in the registry, so we now have `react-csheets`!
+Lots of todos to be done but it can still be used. Documentation is ongoing.
+
+Originally planned to be named _react-cheatsheets_ but "cheat" was forbidden in the registry, so we now have `react-csheets`!
 
 ![react-csheets thumbnail](https://pfftdammitchris-react.s3-us-west-1.amazonaws.com/react-cheatsheets/thumbnail.jpg)
 
