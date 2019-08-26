@@ -20,8 +20,76 @@ npm install --save react-csheets
 
 ```tsx
 import React from 'react'
-import ReactCheatsheets from 'react-csheets'
-import snippets from './snippets'
+import Cheatsheets from 'react-csheets'
+
+const snippets = [
+  {
+    id: 'snipp1',
+    title: 'Fragments',
+    snippet: `
+// Does not support key attribute
+const App = () => (
+  <>
+    <MyComponent />
+  </>
+)
+// Supports key attribute
+const App = () => (
+  <React.Fragment key="abc123">
+    <MyComponent />
+  </React.Fragment>
+)`,
+  },
+  {
+    id: 'snipp2',
+    title: 'Default Props',
+    snippet: `
+// Function component
+const MyComponent = (props) => <div {...props} />
+MyComponent.defaultProps = { fruit: 'apple' }
+
+// Class component
+class MyComponent extends React.Component {
+  static defaultProps = { fruit: 'apple' }
+  render() { return <div {...this.props} /> }
+}  
+`,
+  },
+  {
+    id: 'snipp3',
+    title: 'Imports / Exports',
+    snippet: `
+// default export
+const App = (props) => <div {...props} />
+export default App
+import App from './App'
+
+// named export
+export const App = (props) => <div {...props} />
+import { App } from './App'
+`,
+  },
+  {
+    id: 'snipp4',
+    title: 'Return Types',
+    snippet: `
+const App = () => 'a basic string'    // string
+const App = () => 1234567890          // number
+const App = () => true                // boolean 
+const App = () => null                // null
+const App = () => <div />             // react element
+const App = () => <MyComponent />     // component
+const App = () => [                   // array
+  'a basic string',
+  1234567890,
+  true,
+  null,
+  <div />,
+  <MyComponent />,
+]
+`,
+  },
+]
 
 const App = () => {
   function onThemeChange() {
@@ -33,7 +101,7 @@ const App = () => {
   }
 
   return (
-    <ReactCheatsheets
+    <Cheatsheets
       snippets={snippets}
       columnCount={3}
       language='jsx'
@@ -93,48 +161,85 @@ type RenderProps = ({
 
 // For more info visit https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/types.md
 
-type OnDragEnd = (
-  result: {
-    destination: {
-      droppableId: string
-      index: number
-    } | null
+type OnDragEndResult = {
+  destination: {
+    droppableId: string
+    index: number
+  } | null
+  draggableId: string
+  type: string
+  source: {
+    droppableId: string
+    index: number
+  }
+  mode: 'FLUID' | 'SNAP'
+  combine: {
     draggableId: string
-    type: string
-    source: {
-      droppableId: string
-      index: number
-    }
-    mode: 'FLUID' | 'SNAP'
-    combine: {
-      draggableId: string
-      droppableId: string
-    }
-    reason: 'DROP' | 'CANCEL'
-  },
-  provided: ResponderProvided,
-) => void
+    droppableId: string
+  }
+  reason: 'DROP' | 'CANCEL'
+}
+
+type OnDragEnd = (result: OnDragEndResult, provided: ResponderProvided) => void
 ```
 
 ## Props
 
-> snippets: Array<Snippet[]> (required)
+### **snippets**: `Array<Snippet[]>` (required)
 
-> columnCount: number (optional) defaults to 3
+An array of `Snippet` objects to be rendered in the cheat sheet. Before it gets shown in the interface, it will go through a final formatting stage where the output will be an array of arrays of snippet objects.
 
-> language: string (optional) defaults to `jsx`
+For example:
 
-> theme: stylesheet (optional) defaults to `'coy'`
+```js
+const snippets = [
+  [
+    { id: 'id1', title: '...', snippet: '...' },
+    { id: 'id2', title: '...', snippet: '...' },
+    { id: 'id3', title: '...', snippet: '...' },
+  ],
+  [
+    { id: 'id4', title: '...', snippet: '...' },
+    { id: 'id5', title: '...', snippet: '...' },
+    { id: 'id6', title: '...', snippet: '...' },
+  ],
+  [{ id: 'id7', title: '...', snippet: '...' }],
+]
+```
 
-> onThemeChange: () => void (optional)
+### **columnCount**: `number` (optional) defaults to 3
 
-> onDragEnd: OnDragEnd (optional)
+`columnCount` will update the amount of columns that are shown in the cheat sheet.
 
-> renderHeader: (props: RenderProps) => React.ReactNode (optional)
+### **language**: `string` (optional) defaults to `jsx`
 
-> renderSnippet: (props: RenderProps) => React.ReactNode (optional)
+Changes the language syntax of the snippets. You can check all of the available options [here](https://github.com/conorhastings/react-syntax-highlighter/blob/master/AVAILABLE_LANGUAGES_PRISM.MD). This will reflect through all of the snippets in the cheat sheet.
 
-> renderActions: (props: RenderProps) => React.ReactNode (optional)
+### **theme**: `stylesheet` (optional) defaults to `'coy'`
+
+Changing the theme can dramatically change the look and feel of the cheat sheets accordingly to you or user's likings.
+
+### **onThemeChange**: `() => void` (optional)
+
+Optional callback to call when `theme` changes
+
+### **onDragEnd**: `OnDragEnd` (optional)
+
+Optional callback to call when a snippet box was dragged.
+
+The argument will be passed in a `OnDragEndResult` object.
+
+### **renderHeader**: `(props: RenderProps) => React.ReactNode` (optional)
+
+Optionally pass this in to override the rendering of the header
+
+### **renderActions**: `(props: RenderProps) => React.ReactNode` (optional)
+
+Optionally pass this in to override the rendering of action buttons/icons (shares the same block as the header)
+
+### **renderSnippet**: `(props: RenderProps) => React.ReactNode` (optional)
+
+Optionally pass this in to override the rendering of the snippet box
 
 ## Dependencies
 
