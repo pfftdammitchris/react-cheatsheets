@@ -14,6 +14,8 @@ npm install --save react-cheatsheets
 
 ## Usage
 
+**This package requires React v16.9.0 or above**
+
 ```tsx
 import React from 'react'
 import ReactCheatsheets from 'react-cheatsheets'

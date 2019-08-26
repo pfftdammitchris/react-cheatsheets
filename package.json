@@ -1,7 +1,7 @@
 {
   "name": "react-cheatsheets",
   "version": "1.0.1",
-  "description": "Generate cheat sheets using React",
+  "description": "Generate cheatsheets using React",
   "author": "pfftdammitchris",
   "license": "MIT",
   "repository": "pfftdammitchris/react-cheatsheets",
@@ -19,17 +19,15 @@
     "start": "rollup -c -w",
     "prepare": "npm run build",
     "predeploy": "cd example && npm install && npm run build",
+    "pub": "npm publish --access public",
     "deploy": "gh-pages -d example/build"
   },
   "dependencies": {
-    "classnames": "^2.2.6",
-    "lodash.last": "^3.0.0",
     "react-beautiful-dnd": "^11.0.5",
     "react-popper": "^1.3.4",
     "react-syntax-highlighter": "^11.0.2"
   },
   "peerDependencies": {
-    "prop-types": "^15.5.4",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
