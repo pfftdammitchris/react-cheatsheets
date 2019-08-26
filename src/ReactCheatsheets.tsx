@@ -3,7 +3,6 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import CheatsheetsContext from './Context'
 import CheatsheetsContextProvider from './Provider'
 import SnippetBox from './Snippet'
-import usePopup from './usePopup'
 import { getRowStyle, getSnippetStyle } from './utils'
 import * as types from './types'
 import styles from './styles.css'
@@ -35,7 +34,6 @@ const ReactCheatsheet: React.FC<ReactCheatsheetProps> = ({
   renderActions,
   ...props
 }) => {
-  const popup = usePopup({ timeout: 1000 })
   const ctx = React.useContext(CheatsheetsContext)
   const { rows, theme, onDragEnd } = ctx
 
@@ -77,7 +75,6 @@ const ReactCheatsheet: React.FC<ReactCheatsheetProps> = ({
                             language={language}
                             theme={theme}
                             index={snippIndex}
-                            popup={popup}
                             draggableId={draggableId}
                             innerRef={provided.innerRef}
                             draggableProps={provided.draggableProps}

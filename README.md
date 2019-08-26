@@ -79,13 +79,6 @@ type stylesheet =
   | 'vs'
   | 'xonokai'
 
-type Popup = {
-  context?: any
-  timeout?: number
-  onOpen?: (args?: any) => void
-  onClose?: (args?: any) => any
-}
-
 type RenderProps = ({
   snippet: Snippet,
   popup: Popup,
