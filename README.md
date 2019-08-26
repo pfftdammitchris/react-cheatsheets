@@ -134,6 +134,11 @@ type OnDragEnd = (
 
 > renderActions: (props: RenderProps) => React.ReactNode (optional)
 
+## Dependencies
+
+- react-beautiful-dnd
+- react-syntax-highlighter
+
 ## License
 
 MIT © [pfftdammitchris](https://github.com/pfftdammitchris)
