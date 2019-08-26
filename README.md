@@ -1,10 +1,10 @@
 # react-cheatsheets
 
-> Generate cheat sheets using React
+## Generate cheat sheets using React
+
+Lots of todos to be done but it can still be used. Documentation is ongoing.
 
 ![react-cheatsheets thumbnail](https://pfftdammitchris-react.s3-us-west-1.amazonaws.com/react-cheatsheets/thumbnail.jpg)
-
-Lots of todos to be done but it can still be used. Documentation is still ongoing.
 
 ## Install
 
