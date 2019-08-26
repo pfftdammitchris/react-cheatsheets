@@ -1,1 +1,1 @@
-export { default } from './ReactCheatsheet'
+export { default } from './ReactCheatsheets'

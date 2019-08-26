@@ -1,30 +1,143 @@
-# react-cheatsheet
+# react-cheatsheets
 
 > Generate cheat sheets using React
 
-[![NPM](https://img.shields.io/npm/v/react-cheatsheet.svg)](https://www.npmjs.com/package/react-cheatsheet) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+![react-cheatsheets thumbnail](https://pfftdammitchris-react.s3-us-west-1.amazonaws.com/react-cheatsheets/thumbnail.jpg)
+
+Lots of todos to be done but it can still be used. Documentation is still ongoing.
 
 ## Install
 
 ```bash
-npm install --save react-cheatsheet
+npm install --save react-cheatsheets
 ```
 
 ## Usage
 
 ```tsx
-import * as React from 'react'
+import React from 'react'
+import ReactCheatsheet from 'react-cheatsheet'
+import snippets from './snippets'
 
-import MyComponent from 'react-cheatsheet'
-
-class Example extends React.Component {
-  render () {
-    return (
-      <MyComponent />
-    )
+const App = () => {
+  function onThemeChange() {
+    console.log('theme changed')
   }
+
+  function onDragEnd(result) {
+    console.log('results: ', result)
+  }
+
+  return (
+    <ReactCheatsheet
+      snippets={snippets}
+      columnCount={3}
+      language='jsx'
+      theme='coy'
+      onThemeChange={onThemeChange}
+      onDragEnd={onDragEnd}
+    />
+  )
 }
+
+export default App
 ```
+
+## Interfaces
+
+```ts
+type Snippet = {
+  id: string
+  title: string
+  snippet: string
+}
+
+type stylesheet =
+  | 'coy'
+  | 'dark'
+  | 'funky'
+  | 'okaidia'
+  | 'solarizedlight'
+  | 'tomorrow'
+  | 'twilight'
+  | 'prism'
+  | 'atomDark'
+  | 'base16AteliersulphurpoolLight'
+  | 'cb'
+  | 'darcula'
+  | 'duotoneDark'
+  | 'duotoneEarth'
+  | 'duotoneForest'
+  | 'duotoneLight'
+  | 'duotoneSea'
+  | 'duotoneSpace'
+  | 'ghcolors'
+  | 'hopscotch'
+  | 'pojoaque'
+  | 'vs'
+  | 'xonokai'
+
+type Popup = {
+  context?: any
+  timeout?: number
+  onOpen?: (args?: any) => void
+  onClose?: (args?: any) => any
+}
+
+type RenderProps = ({
+  snippet: Snippet,
+  popup: Popup,
+  index: number,
+  isDragging: boolean,
+  draggableId: string,
+  ...draggableProps,
+  ...dragHandleProps
+}) => React.ReactNode
+
+// For more info visit https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/types.md
+
+type OnDragEnd = (
+  result: {
+    destination: {
+      droppableId: string
+      index: number
+    } | null
+    draggableId: string
+    type: string
+    source: {
+      droppableId: string
+      index: number
+    }
+    mode: 'FLUID' | 'SNAP'
+    combine: {
+      draggableId: string
+      droppableId: string
+    }
+    reason: 'DROP' | 'CANCEL'
+  },
+  provided: ResponderProvided,
+) => void
+```
+
+## Props
+
+> snippets: Array<Snippet[]> (required)
+
+> columnCount: number (optional) defaults to 3
+
+> language: string (optional) defaults to `jsx`
+
+> theme: stylesheet (optional) defaults to `'coy'`
+
+> onThemeChange: () => void (optional)
+
+> onDragEnd: OnDragEnd (optional)
+
+> renderHeader: (props: RenderProps) => React.ReactNode (optional)
+
+> renderSnippet: (props: RenderProps) => React.ReactNode (optional)
+
+> renderActions: (props: RenderProps) => React.ReactNode (optional)
 
 ## License
 

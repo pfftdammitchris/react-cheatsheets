@@ -1,6 +1,29 @@
-.boxLabel {
+.rcsRoot {
+}
+
+.snippetTitle {
   padding: 10px 6px 0 !important;
   text-transform: none !important;
-  margin-bottom: 0 !important;
-  opacity: 0.55;
+  margin: 0 !important;
+  font-weight: 300 !important;
+  color: rgba(150, 150, 150, 0.95) !important;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.snippetAction {
+}
+
+.copyIcon {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  transition: all 0.5s ease-out;
+}
+
+.copyIcon:hover {
+  transform: scale(1.02) translate(3px, -3px);
+  color: #000;
 }

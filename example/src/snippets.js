@@ -286,3 +286,21 @@ it('does stuff', async () => {
   })
 })
 `
+
+const snippets = [
+  { title: 'Hooks', snippet: hooks },
+  { title: 'Methods', snippet: methods },
+  { title: 'Fragments', snippet: fragments },
+  { title: 'Default Props', snippet: defaultProps },
+  { title: 'Component States', snippet: states },
+  { title: 'Rendering Components', snippet: renders },
+  { title: 'Imports', snippet: imports },
+  { title: 'Return Types', snippet: returnTypes },
+  { title: 'Errors', snippet: errors },
+  { title: 'Static Properties/Methods', snippet: statics },
+  { title: 'Modes', snippet: modes },
+  { title: 'Pointer Events', snippet: pointerEvents },
+  { title: 'Testing', snippet: testing },
+]
+
+export default snippets
