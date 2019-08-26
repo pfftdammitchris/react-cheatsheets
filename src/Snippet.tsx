@@ -38,6 +38,7 @@ const SnippetContent: React.FC<{ theme: stylesheet; language: string }> = ({
       style={stylesheets[theme]}
       codeTagProps={{}}
       customStyle={{
+        fontSize: '0.8rem',
         lineHeight: 0.95,
         padding: 4,
       }}
