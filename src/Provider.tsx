@@ -109,11 +109,7 @@ const useCheatsheet = ({
       dispatch({ type: 'set-rows', rows: nextRows })
     }
     if (typeof onDragEndProp === 'function') {
-      onDragEndProp({
-        ...result,
-        isSameRow,
-        nextRows,
-      })
+      onDragEndProp(nextRows)
     }
   }
 
@@ -125,21 +121,10 @@ const useCheatsheet = ({
   }, [state.columnCount, columnCount])
 
   React.useEffect(() => {
-    function onThemeChange(theme: stylesheet) {
-      if (theme) {
-        dispatch({ type: 'set-theme', theme })
-        if (typeof onThemeChangeProp === 'function') {
-          onThemeChangeProp()
-        }
-      } else {
-        console.warn('No theme provided to onThemeChange')
-      }
-    }
-
     // is controlled
     if (themeProp) {
       if (state.theme !== themeProp) {
-        onThemeChange(themeProp)
+        dispatch({ type: 'set-theme', theme: themeProp })
       }
     }
   }, [onThemeChangeProp, state.theme, themeProp])

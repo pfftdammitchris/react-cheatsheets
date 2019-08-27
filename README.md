@@ -92,12 +92,8 @@ const App = () => [                   // array
 ]
 
 const App = () => {
-  function onThemeChange() {
-    console.log('theme changed')
-  }
-
-  function onDragEnd(result) {
-    console.log('results: ', result)
+  function onDragEnd(rows) {
+    console.log('new rows: ', rows)
   }
 
   return (
@@ -106,7 +102,6 @@ const App = () => {
       columnCount={3}
       language='jsx'
       theme='coy'
-      onThemeChange={onThemeChange}
       onDragEnd={onDragEnd}
     />
   )
@@ -148,39 +143,6 @@ type stylesheet =
   | 'pojoaque'
   | 'vs'
   | 'xonokai'
-
-type RenderProps = ({
-  snippet: Snippet,
-  popup: Popup,
-  index: number,
-  isDragging: boolean,
-  draggableId: string,
-  ...draggableProps,
-  ...dragHandleProps
-}) => React.ReactNode
-
-// For more info visit https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/types.md
-
-type OnDragEndResult = {
-  destination: {
-    droppableId: string
-    index: number
-  } | null
-  draggableId: string
-  type: string
-  source: {
-    droppableId: string
-    index: number
-  }
-  mode: 'FLUID' | 'SNAP'
-  combine: {
-    draggableId: string
-    droppableId: string
-  }
-  reason: 'DROP' | 'CANCEL'
-}
-
-type OnDragEnd = (result: OnDragEndResult, provided: ResponderProvided) => void
 ```
 
 ## Props
@@ -219,27 +181,23 @@ Changes the language syntax of the snippets. You can check all of the available 
 
 Changing the theme can dramatically change the look and feel of the cheat sheets accordingly to you or user's likings.
 
-### **onThemeChange**: `() => void` (optional)
-
-Optional callback to call when `theme` changes
-
-### **onDragEnd**: `OnDragEnd` (optional)
+### **onDragEnd**: `(rows: Array<Snippet[]>) => void` (optional)
 
 Optional callback to call when a snippet box was dragged.
 
-The argument will be passed in a `OnDragEndResult` object.
+The argument will be passed in the new rows as the first argument
 
-### **renderHeader**: `(props: RenderProps) => React.ReactNode` (optional)
+### **renderHeader**: `({ title?: React.ReactNode, isDragging: boolean, index: number }) => React.ReactNode` (optional)
 
 Optionally pass this in to override the rendering of the header
 
-### **renderActions**: `(props: RenderProps) => React.ReactNode` (optional)
-
-Optionally pass this in to override the rendering of action buttons/icons (shares the same block as the header)
-
-### **renderSnippet**: `(props: RenderProps) => React.ReactNode` (optional)
+### **renderSnippet**: `({ snippet: string, popup: Popup, index: number, isDragging: boolean }) => React.ReactNode` (optional)
 
 Optionally pass this in to override the rendering of the snippet box
+
+### **renderActions**: `({ snippet: string, index: number, isDragging: boolean }) => React.ReactNode` (optional)
+
+Optionally pass this in to override the rendering of action buttons/icons (shares the same block as the header)
 
 ## Dependencies
 

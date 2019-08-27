@@ -11,7 +11,6 @@ interface SnippetProps {
   title: React.ReactNode
   snippet: string
   index: number
-  draggableId: string
   popup: any
   innerRef: any
   draggableProps: any
@@ -22,7 +21,11 @@ interface SnippetProps {
     draggableStyle: React.CSSProperties,
     { index }: { index?: number },
   ) => React.CSSProperties
-  renderHeader?: (props: any) => React.ReactNode
+  renderHeader?: (options?: {
+    title?: React.ReactNode
+    isDragging: boolean
+    index: number
+  }) => React.ReactNode
   renderSnippet?: (props: any) => React.ReactNode
   renderActions?: (props: any) => React.ReactNode
 }
@@ -55,7 +58,6 @@ const Snippet: React.FC<SnippetProps> = ({
   snippet,
   index,
   popup,
-  draggableId,
   innerRef,
   draggableProps,
   dragHandleProps,
@@ -64,37 +66,37 @@ const Snippet: React.FC<SnippetProps> = ({
   renderHeader,
   renderSnippet,
   renderActions,
-}) => {
-  const renderProps = {
-    snippet,
-    popup,
-    index,
-    isDragging,
-    draggableId,
-    ...draggableProps,
-    ...dragHandleProps,
-  }
-
-  return (
-    <span
-      ref={innerRef}
-      {...draggableProps}
-      style={getSnippetStyle(isDragging, draggableProps.style, { index })}
-      {...dragHandleProps}
-    >
-      {renderHeader ? (
-        renderHeader(renderProps)
-      ) : (
-        <span className={styles.snippetTitle}>
-          <div>{title}</div>
-          {renderActions && renderActions(renderProps)}
-        </span>
-      )}
-      <SnippetContent language={language} theme={theme}>
-        {renderSnippet ? renderSnippet(renderProps) : trim(snippet)}
-      </SnippetContent>
-    </span>
-  )
-}
+}) => (
+  <span
+    ref={innerRef}
+    {...draggableProps}
+    style={getSnippetStyle(isDragging, draggableProps.style, { index })}
+    {...dragHandleProps}
+  >
+    {renderHeader ? (
+      renderHeader({ title, isDragging, index })
+    ) : (
+      <span className={styles.snippetTitle}>
+        <div>{title}</div>
+        {renderActions &&
+          renderActions({
+            snippet,
+            index,
+            isDragging,
+          })}
+      </span>
+    )}
+    <SnippetContent language={language} theme={theme}>
+      {renderSnippet
+        ? renderSnippet({
+            snippet,
+            popup,
+            index,
+            isDragging,
+          })
+        : trim(snippet)}
+    </SnippetContent>
+  </span>
+)
 
 export default Snippet
