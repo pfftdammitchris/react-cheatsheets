@@ -143,6 +143,12 @@ type stylesheet =
   | 'pojoaque'
   | 'vs'
   | 'xonokai'
+
+type RenderHeader = ({ title?: React.ReactNode, isDragging: boolean, index: number }) => React.ReactNode
+
+type RenderSnippet ({ snippet: string, popup: Popup, index: number, isDragging: boolean }) => React.ReactNode
+
+type RenderActions = ({ snippet: string, index: number, isDragging: boolean }) => React.ReactNode
 ```
 
 ## Props
@@ -172,15 +178,15 @@ const snippets = [
 
 ### Props
 
-| Prop          | Type                                                                                                    | Default                                                                                                                                                                                             | Description                                                                                                       |
-| ------------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| columnCount   | `number`                                                                                                | 3                                                                                                                                                                                                   | Updates the number of columns in the cheat sheet.                                                                 |
-| language      | `string`                                                                                                | Changes the language syntax of the snippets. You can check all of the available options [here](https://github.com/conorhastings/react-syntax-highlighter/blob/master/AVAILABLE_LANGUAGES_PRISM.MD). |
-| theme         | `string`                                                                                                | coy                                                                                                                                                                                                 | Changes the stylesheet of the snippets. This can dramatically change the look and feel of the cheat sheet.        |
-| onDragEnd     | `(rows: Array<Snippet[]>) => void`                                                                      | OnDragEnd                                                                                                                                                                                           | Optional callback to call when the snippet box was dragged. The new rows will be passed in as the first argument. |
-| renderHeader  | `({ title?: React.ReactNode, isDragging: boolean, index: number }) => React.ReactNode` (optional)       | undefined                                                                                                                                                                                           | Optionally pass this in to override the rendering of the header                                                   |
-| renderSnippet | `({ snippet: string, popup: Popup, index: number, isDragging: boolean }) => React.ReactNode` (optional) | undefined                                                                                                                                                                                           | Optionally pass this in to override the rendering of the snippet box                                              |
-| renderActions | `({ snippet: string, index: number, isDragging: boolean }) => React.ReactNode` (optional)               | undefined                                                                                                                                                                                           | Optionally pass this in to override the rendering of action buttons/icons (shares the same block as the header)   |
+| Prop          | Type                               | Default                                                                                                                                                                                             | Description                                                                                                       |
+| ------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| columnCount   | `number`                           | 3                                                                                                                                                                                                   | Updates the number of columns in the cheat sheet.                                                                 |
+| language      | `string`                           | Changes the language syntax of the snippets. You can check all of the available options [here](https://github.com/conorhastings/react-syntax-highlighter/blob/master/AVAILABLE_LANGUAGES_PRISM.MD). |
+| theme         | `string`                           | coy                                                                                                                                                                                                 | Changes the stylesheet of the snippets. This can dramatically change the look and feel of the cheat sheet.        |
+| onDragEnd     | `(rows: Array<Snippet[]>) => void` | OnDragEnd                                                                                                                                                                                           | Optional callback to call when the snippet box was dragged. The new rows will be passed in as the first argument. |
+| renderHeader  | `RenderHeader`                     | undefined                                                                                                                                                                                           | Optionally pass this in to override the rendering of the header                                                   |
+| renderSnippet | `RenderSnippet`                    | undefined                                                                                                                                                                                           | Optionally pass this in to override the rendering of the snippet box                                              |
+| renderActions | `RenderActions`                    | undefined                                                                                                                                                                                           | Optionally pass this in to override the rendering of action buttons/icons (shares the same block as the header)   |
 
 ## Dependencies
 
