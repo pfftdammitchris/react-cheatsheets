@@ -110,7 +110,7 @@ const App = () => {
 export default App
 ```
 
-## Interfaces
+## TypeScript
 
 ```ts
 type Snippet = {
@@ -147,13 +147,14 @@ type stylesheet =
 
 ## Props
 
-### **snippets**: `Array<Snippet[]>` (required)
+### **snippets**: `Snippet[]` (required)
 
-An array of `Snippet` objects to be rendered in the cheat sheet. Before it gets shown in the interface, it will go through a final formatting stage where the output will be an array of arrays of snippet objects.
+An array of `Snippet` objects to be rendered in the cheat sheet. Before it gets sent to the interface it will go through a final formatting stage in which the output becomes an array of arrays of snippet objects.
 
 For example:
 
 ```js
+// output
 const snippets = [
   [
     { id: 'id1', title: '...', snippet: '...' },
@@ -179,7 +180,7 @@ Changes the language syntax of the snippets. You can check all of the available 
 
 ### **theme**: `stylesheet` (optional) defaults to `'coy'`
 
-Changing the theme can dramatically change the look and feel of the cheat sheets accordingly to you or user's likings.
+Changing the theme can dramatically change the look and feel of the cheat sheets.
 
 ### **onDragEnd**: `(rows: Array<Snippet[]>) => void` (optional)
 
