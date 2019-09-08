@@ -153,33 +153,9 @@ type RenderActions = ({ snippet: string, index: number, isDragging: boolean }) =
 
 ## Props
 
-### **snippets**: `Snippet[]` (required)
-
-An array of `Snippet` objects to be rendered in the cheat sheet. Before it gets sent to the interface it will go through a final formatting stage in which the output becomes an array of arrays of snippet objects.
-
-For example:
-
-```js
-// output
-const snippets = [
-  [
-    { id: 'id1', title: '...', snippet: '...' },
-    { id: 'id2', title: '...', snippet: '...' },
-    { id: 'id3', title: '...', snippet: '...' },
-  ],
-  [
-    { id: 'id4', title: '...', snippet: '...' },
-    { id: 'id5', title: '...', snippet: '...' },
-    { id: 'id6', title: '...', snippet: '...' },
-  ],
-  [{ id: 'id7', title: '...', snippet: '...' }],
-]
-```
-
-### Props
-
 | Prop          | Type                               | Default   | Description                                                                                                                                                                                         |
 | ------------- | ---------------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| snippets      | `Snippet[]`                        | undefined | An array of `Snippet` objects. Before it gets sent to the interface it will go through a final formatting stage in which the output becomes an array of arrays of snippet objects.                  |
 | columnCount   | `number`                           | 3         | Updates the number of columns in the cheat sheet.                                                                                                                                                   |
 | language      | `string`                           | jsx       | Changes the language syntax of the snippets. You can check all of the available options [here](https://github.com/conorhastings/react-syntax-highlighter/blob/master/AVAILABLE_LANGUAGES_PRISM.MD). |
 | theme         | `string`                           | coy       | Changes the stylesheet of the snippets. This can dramatically change the look and feel of the cheat sheet.                                                                                          |
