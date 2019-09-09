@@ -8,22 +8,13 @@ import styles from './styles.css'
 interface SnippetProps {
   language?: string
   theme: stylesheet
+  id: string
   title: React.ReactNode
-  snippet: string
+  content: string
   index: number
   popup: any
-  innerRef: any
-  draggableProps: any
-  dragHandleProps: any
-  isDragging: any
-  getSnippetStyle: (
-    isDragging: boolean,
-    draggableStyle: React.CSSProperties,
-    { index }: { index?: number },
-  ) => React.CSSProperties
   renderHeader?: (options?: {
     title?: React.ReactNode
-    isDragging: boolean
     index: number
   }) => React.ReactNode
   renderSnippet?: (props: any) => React.ReactNode
@@ -54,47 +45,37 @@ const SnippetContent: React.FC<{ theme: stylesheet; language: string }> = ({
 const Snippet: React.FC<SnippetProps> = ({
   language = 'jsx',
   theme,
+  id,
   title,
-  snippet,
+  content,
   index,
   popup,
-  innerRef,
-  draggableProps,
-  dragHandleProps,
-  isDragging,
-  getSnippetStyle,
   renderHeader,
   renderSnippet,
   renderActions,
 }) => (
-  <span
-    ref={innerRef}
-    {...draggableProps}
-    style={getSnippetStyle(isDragging, draggableProps.style, { index })}
-    {...dragHandleProps}
-  >
+  <span>
     {renderHeader ? (
-      renderHeader({ title, isDragging, index })
+      renderHeader({ title, index })
     ) : (
       <span className={styles.snippetTitle}>
         <div>{title}</div>
         {renderActions &&
           renderActions({
-            snippet,
+            content,
+            title,
             index,
-            isDragging,
           })}
       </span>
     )}
     <SnippetContent language={language} theme={theme}>
       {renderSnippet
         ? renderSnippet({
-            snippet,
+            content,
             popup,
             index,
-            isDragging,
           })
-        : trim(snippet)}
+        : content}
     </SnippetContent>
   </span>
 )

@@ -38,7 +38,7 @@ export type Reason = 'DROP'
 export type Snippet = {
   id: string
   title: string
-  snippet: string
+  content: string
 }
 
 export type Snippets = Array<Snippet[]>

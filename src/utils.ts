@@ -67,8 +67,8 @@ export function getSnippetStyle(
   }
 }
 
-export function getRowIndex(droppableId: string | number) {
-  return Number(droppableId) - 1
+export function getRowIndex(rowIndex: string | number) {
+  return Number(rowIndex) - 1
 }
 
 // Retrieves the last item in an array

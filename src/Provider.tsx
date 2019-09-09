@@ -18,6 +18,7 @@ import {
 
 interface UseCheatsheetsArgs {
   snippets: Snippet[]
+  language?: string
   columnCount?: number
   theme?: stylesheet
   onThemeChange?: () => void
@@ -32,6 +33,8 @@ const reducer = (state: State, action: Action): State => {
       return { ...state, rows: action.rows }
     case 'set-theme':
       return { ...state, theme: action.theme || initialState.theme }
+    case 'set-language':
+      return { ...state, language: action.language || state.language }
     default:
       return state
   }
@@ -54,26 +57,27 @@ function initSnippets(
 }
 
 const useCheatsheet = ({
+  language,
   snippets,
   columnCount = initialState.columnCount,
   theme: themeProp,
   onThemeChange: onThemeChangeProp,
   onDragEnd: onDragEndProp,
+  renderHeader,
+  renderSnippet,
+  renderActions,
 }: UseCheatsheetsArgs) => {
   const [state, dispatch] = React.useReducer(reducer, {
     ...initialState,
+    language,
     rows: initSnippets(snippets, columnCount),
     theme: themeProp || initialState.theme,
     columnCount,
   })
 
-  // We made the droppableId always start at 1 instead of 0
-  function getRowSnippets(
-    droppableId: number | string,
-    index?: number,
-  ): Snippet[] {
-    index = typeof index === 'number' ? index : getRowIndex(droppableId)
-    return state.rows[index]
+  function onSortEnd({ oldIndex, newIndex, collection, isKeySorting }, e) {
+    dispatch({ type: 'set-rows', rows: [] })
+    const isSameRow = collection
   }
 
   function onDragEnd(result: onDragEndResult) {
@@ -133,6 +137,9 @@ const useCheatsheet = ({
     ...state,
     onDragEnd,
     stylesheets,
+    renderHeader,
+    renderSnippet,
+    renderActions,
   }
 }
 
