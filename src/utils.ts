@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as types from './types'
 
-export const isFunction = (fn: any): boolean => typeof fn === 'function'
+export const isFunction = (fn: any): fn is Function => fn instanceof Function
 
 export function filterBadSnippets(snippets: types.Snippet[]): types.Snippet[] {
   return snippets.filter((o) => {
@@ -37,7 +37,7 @@ export function formatSnippets(
 
 export function getRowStyle(
   isDraggingOver: boolean,
-  { index }: { index?: number } = {},
+  // { index }: { index?: number } = {},
 ) {
   return {
     display: 'flex',
@@ -50,7 +50,7 @@ export function getRowStyle(
 export function getSnippetStyle(
   isDragging: boolean,
   draggableStyle: React.CSSProperties,
-  { index }: { index?: number } = {},
+  // { index }: { index?: number } = {},
 ): React.CSSProperties {
   return {
     padding: 8,
@@ -150,7 +150,7 @@ export function copyToClipboard(
 ) {
   if (typeof window !== 'undefined') {
     if (text) {
-      let copy
+      // let copy
       const splitText = text.split('\n').join('\n')
       // Browser supports new Clipboard API
       if (navigator) {

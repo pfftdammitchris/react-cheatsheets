@@ -1,14 +1,15 @@
-import typescript from 'rollup-plugin-typescript2'
+import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
 import external from 'rollup-plugin-peer-deps-external'
 import json from 'rollup-plugin-json'
-// import postcss from 'rollup-plugin-postcss-modules'
 import postcss from 'rollup-plugin-postcss'
 import resolve from 'rollup-plugin-node-resolve'
 import url from 'rollup-plugin-url'
 import svgr from '@svgr/rollup'
 
 import pkg from './package.json'
+
+const extensions = ['.js', '.jsx', '.ts', '.tsx', 'json', '.mjs', '.es6']
 
 export default {
   input: 'src/index.tsx',
@@ -28,17 +29,16 @@ export default {
   ],
   plugins: [
     json(),
-    external(),
+    external({
+      includeDependencies: true,
+    }),
     postcss({
       modules: true,
     }),
     url(),
     svgr(),
-    resolve(),
-    typescript({
-      abortOnError: false,
-      clean: true,
-      rollupCommonJSResolveHack: true,
+    resolve({
+      extensions,
     }),
     commonjs({
       namedExports: {
@@ -48,6 +48,11 @@ export default {
           'isContextConsumer',
         ],
       },
+    }),
+    babel({
+      extensions,
+      include: ['src/**/*'],
+      exclude: ['node_modules/**'],
     }),
   ],
 }
