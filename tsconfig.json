@@ -19,7 +19,6 @@
     "noImplicitThis": true,
     "outDir": "dist",
     "pretty": true,
-    "sourceMap": true,
     "strictNullChecks": true,
     "target": "esnext"
   },

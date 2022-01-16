@@ -87,25 +87,25 @@ function ReactCheatsheets({
    */
   const onBeforeCapture: OnBeforeCaptureResponder = React.useCallback(
     (args) => {
-      console.log(`[onBeforeCapture] args`, args)
+      // console.log(`[onBeforeCapture] args`, args)
     },
     [],
   )
 
   const onBeforeDragStart: OnBeforeDragStartResponder = React.useCallback(
     (args) => {
-      console.log(`[onBeforeDragStart] args`, args)
+      // console.log(`[onBeforeDragStart] args`, args)
     },
     [],
   )
 
   const onDragStart: OnDragStartResponder = React.useCallback((args) => {
-    console.log(`[onDragStart] args`, args)
+    // console.log(`[onDragStart] args`, args)
   }, [])
 
   const onDragEnd: OnDragEndResponder = React.useCallback(
     (dropResult, provided) => {
-      console.log(`[onDragEnd]`, { dropResult, provided })
+      // console.log(`[onDragEnd]`, { dropResult, provided })
       if (!dropResult.destination) return
       const { source, destination } = dropResult
       const isSameRow = source.droppableId === destination.droppableId
@@ -141,7 +141,7 @@ function ReactCheatsheets({
 
   const onDragUpdate: OnDragUpdateResponder = React.useCallback(
     (update, provided) => {
-      console.log(`[onDragUpdate]`, { update, provided })
+      // console.log(`[onDragUpdate]`, { update, provided })
     },
     [],
   )

@@ -22,11 +22,10 @@ const config = {
       'react-dom': 'reactDOM',
       'react-beautiful-dnd': 'ReactBeautifulDND',
       'react-syntax-highlighter': 'ReactSyntaxHighlighter',
-      'react-syntax-highlighter/dist/esm/styles/prism': 'prismStylesheet',
+      'react-syntax-highlighter/dist/cjs/styles/prism': 'prismStylesheet',
       refractor: 'refractor',
     },
   },
-  external: ['@babel/runtime/helpers/interopRequireDefault'],
   plugins: [
     json(),
     filesize(),
@@ -34,6 +33,7 @@ const config = {
     resolve({
       browser: true,
       extensions: ['.js', '.ts'],
+      moduleDirectories: ['node_modules'],
     }),
     commonjs({
       sourceMap: false,
@@ -53,7 +53,7 @@ const config = {
       minify: process.env.NODE_ENV !== 'development',
       minifyIdentifiers: false,
       sourceMap: true,
-      target: 'es2017',
+      target: 'es2015',
     }),
   ],
 }

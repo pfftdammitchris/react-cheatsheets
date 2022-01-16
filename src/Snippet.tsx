@@ -1,6 +1,6 @@
 import React from 'react'
-import * as stylesheets from 'react-syntax-highlighter/dist/esm/styles/prism'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import * as stylesheets from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { Prism } from 'react-syntax-highlighter'
 import { trim } from './utils'
 import * as t from './types'
 import styles from './styles.css'
@@ -38,20 +38,18 @@ function SnippetContent({
   Pick<t.ReactCheatsheetsContext, 'language' | 'theme'>
 >) {
   return (
-    <div>
-      <SyntaxHighlighter
-        language={language}
-        style={stylesheets[theme]}
-        codeTagProps={{}}
-        customStyle={{
-          fontSize: '0.8rem',
-          lineHeight: 0.95,
-          padding: 4,
-        }}
-      >
-        {children}
-      </SyntaxHighlighter>
-    </div>
+    <Prism
+      language={language}
+      codeTagProps={{}}
+      customStyle={{
+        fontSize: '0.8rem',
+        lineHeight: 0.95,
+        padding: 4,
+      }}
+      style={stylesheets[theme]}
+    >
+      {children}
+    </Prism>
   )
 }
 
