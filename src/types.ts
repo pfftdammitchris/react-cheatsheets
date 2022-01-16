@@ -1,3 +1,18 @@
+import { initialState } from './ReactCheatsheets'
+
+export type ReactCheatsheetsState = typeof initialState
+
+export interface ReactCheatsheetsContext {
+  columnCount: number
+  language: string
+  rows: any[]
+  snippets: Snippet[]
+  setColumnCount(columnCount: number): void
+  setRows(rows: any[]): void
+  setTheme(theme: string): void
+  theme: stylesheet
+}
+
 export type Destination = {
   droppableId: number | string
   index: number
@@ -41,8 +56,6 @@ export type Snippet = {
   snippet: string
 }
 
-export type Snippets = Array<Snippet[]>
-
 export type Source = Destination
 
 export type stylesheet =
@@ -69,14 +82,3 @@ export type stylesheet =
   | 'pojoaque'
   | 'vs'
   | 'xonokai'
-
-export type UseCheatsheetAction =
-  | { type: 'set-column-count'; columnCount: number }
-  | { type: 'set-rows'; rows: Array<Snippet[]> }
-  | { type: 'set-theme'; theme: stylesheet }
-
-export type UseCheatsheetState = {
-  rows: Array<Snippet[]>
-  columnCount: number
-  theme: stylesheet
-}

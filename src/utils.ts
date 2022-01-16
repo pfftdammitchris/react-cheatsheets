@@ -1,9 +1,22 @@
-import * as React from 'react'
-import * as types from './types'
+import React from 'react'
+import { Snippet } from '.'
+import * as t from './types'
 
-export const isFunction = (fn: any): boolean => typeof fn === 'function'
+export const isArr = (value: unknown): value is any[] => Array.isArray(value)
 
-export function filterBadSnippets(snippets: types.Snippet[]): types.Snippet[] {
+export const isFnc = <
+  O extends (...args: any[]) => any = (...args: any[]) => any,
+>(
+  fn: unknown,
+): fn is O => typeof fn === 'function'
+
+export const isObj = (value: unknown): value is Record<string, any> =>
+  !!value && !isArr(value) && typeof value === 'object'
+
+export const isNum = (value: unknown): value is number =>
+  typeof value === 'number'
+
+export function filterBadSnippets(snippets: t.Snippet[]): t.Snippet[] {
   return snippets.filter((o) => {
     if (!o.id && !o.title && !o.snippet) {
       console.warn(
@@ -16,10 +29,10 @@ export function filterBadSnippets(snippets: types.Snippet[]): types.Snippet[] {
 }
 
 export function formatSnippets(
-  snippets: types.Snippet[],
+  snippets: t.Snippet[],
   columnCount: number,
-): types.Snippets {
-  const reducer = (acc: types.Snippets, snippet: types.Snippet) => {
+): t.Snippet[][] {
+  const reducer = (acc: t.Snippet[][], snippet: t.Snippet) => {
     const lastColumn = last(acc)
 
     // Maximum items of each row is the value of columnCount
@@ -35,13 +48,22 @@ export function formatSnippets(
   return result
 }
 
+// We made the droppableId always start at 1 instead of 0
+export function getRowSnippets(
+  rows: Snippet[][],
+  droppableId: number | string,
+  index?: number,
+): Snippet[] {
+  index = isNum(index) ? index : getRowIndex(droppableId)
+  return rows[index]
+}
+
 export function getRowStyle(
   isDraggingOver: boolean,
   { index }: { index?: number } = {},
 ) {
   return {
     display: 'flex',
-    // alignItems: 'flex-start',
     outline: 'none',
     background: isDraggingOver ? 'teal' : undefined,
   }
@@ -77,7 +99,7 @@ export function last(arr: any[]) {
   return length ? arr[length - 1] : undefined
 }
 
-export function reorder(row: types.Snippet[], start: number, end: number) {
+export function reorder(row: t.Snippet[], start: number, end: number) {
   const result = row.slice()
   const [removed] = result.splice(start, 1)
   result.splice(end, 0, removed)
@@ -108,14 +130,14 @@ export const stylesheets = [
   'pojoaque',
   'vs',
   'xonokai',
-]
+] as const
 
 // Moves an item to a separate column
 export function moveToColumn(
-  source: types.Snippet[],
-  destination: types.Snippet[],
-  droppableSource: types.Source,
-  droppableDestination: types.Destination,
+  source: t.Snippet[],
+  destination: t.Snippet[],
+  droppableSource: t.Source,
+  droppableDestination: t.Destination,
 ) {
   const sourceClone = source.slice()
   const destClone = destination.slice()
@@ -123,7 +145,7 @@ export function moveToColumn(
 
   destClone.splice(droppableDestination.index, 0, removed)
 
-  const result = {}
+  const result = {} as Record<string, any>
   result[droppableSource.droppableId] = sourceClone
   result[droppableDestination.droppableId] = destClone
 
@@ -172,7 +194,7 @@ export function copyToClipboard(
     } else {
       let msg = 'Tried to copy text to clipboard but the text was empty'
       console.warn(msg)
-      if (isFunction(onError)) onError(new Error(msg))
+      if (isFnc(onError)) onError(new Error(msg))
     }
   }
 }

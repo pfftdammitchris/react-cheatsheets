@@ -7,9 +7,9 @@
   "dependencies": {
     "prop-types": "^15.6.2",
     "react": "../node_modules/react",
+    "react-cheatsheet": "file:..",
     "react-dom": "../node_modules/react-dom",
-    "react-scripts": "^1.1.4",
-    "react-cheatsheet": "file:.."
+    "react-scripts": "^1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
