@@ -9,7 +9,7 @@
     "react": "../node_modules/react",
     "react-cheatsheet": "file:..",
     "react-dom": "../node_modules/react-dom",
-    "react-scripts": "^1.1.4"
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
