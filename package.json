@@ -44,7 +44,7 @@
     "gh-pages": "^1.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-scripts-ts": "^2.16.0",
+    "react-scripts-ts": "^4.0.8",
     "rollup": "^2.64.0",
     "rollup-plugin-esbuild": "^4.8.2",
     "rollup-plugin-filesize": "^9.1.2",
