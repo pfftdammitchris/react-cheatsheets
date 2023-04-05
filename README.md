@@ -4,7 +4,7 @@
 
 Originally planned to be named _react-cheatsheets_ but "cheat" was forbidden in the registry, so we now have `react-csheets`!
 
-![react-csheets thumbnail](https://pfftdammitchris-react.s3-us-west-1.amazonaws.com/react-cheatsheets/thumbnail.jpg)
+![react-csheets thumbnail](https://s3.us-west-1.amazonaws.com/christran.dev/posts/react-csheet/react-cheatsheet1.png)
 
 ## Install
 
